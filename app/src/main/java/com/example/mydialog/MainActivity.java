@@ -14,12 +14,23 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    Note tempNote = new Note();
+
+    public void createNewNote(Note note) {
+        tempNote = note;
+
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        DialogShowNote dialog = new DialogShowNote();
+        dialog.sendNoteSelected(tempNote);
+        dialog.show(getSupportFragmentManager(), "123");
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -12,8 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/important_text"
-        app:layout_constraintEnd_toStartOf="@+id/textViewTodo"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,10 +20,10 @@
         android:id="@+id/textViewIdea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="160dp"
         android:text="@string/idea_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewTodo"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -33,9 +31,12 @@
         android:id="@+id/textViewTodo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="80dp"
         android:text="@string/todo_text"
-        app:layout_constraintEnd_toStartOf="@+id/textViewIdea"
-        app:layout_constraintStart_toEndOf="@+id/textViewImportant"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewIdea"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -54,10 +55,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="307dp"
         android:layout_marginBottom="306dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTodo" />
 
     <Button
         android:id="@+id/btnOk"
