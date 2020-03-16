@@ -7,39 +7,65 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Note tempNote = new Note();
+    RecyclerView recyclerView;
+    NoteAdapter adapter;
 
+    ArrayList<Note> listNote = new ArrayList<>();
     public void createNewNote(Note note) {
-        tempNote = note;
-
+        listNote.add(note);
 
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        DialogShowNote dialog = new DialogShowNote();
-        dialog.sendNoteSelected(tempNote);
-        dialog.show(getSupportFragmentManager(), "123");
+        //final Button button = (Button)findViewById(R.id.button);
+        //button.setOnClickListener(new View.OnClickListener()){
+            //@Override
+              //      public void onClick(View v){
+                //DialogShowNote dialog = new DialogShowNote();
+                //dialog.sendNoteSelected(tempNote);
+                //dialog.show(getSupportFragmentManager(), "123");
+           // }
+
+       // };
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                DialogNewNote dialog = new DialogNewNote();
+                dialog.show(getSupportFragmentManager(), "");
             }
         });
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        adapter = new NoteAdapter(this, listNote);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
