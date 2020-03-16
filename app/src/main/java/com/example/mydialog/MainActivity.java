@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Note> listNote = new ArrayList<>();
     public void createNewNote(Note note) {
         listNote.add(note);
+        adapter.notifyDataSetChanged();
 
     }
 
@@ -88,5 +89,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showNote(int index) {
+        DialogShowNote dialog = new DialogShowNote();
+        dialog.sendNoteSelected(listNote.get(index));
+        dialog.show(getSupportFragmentManager(), "");
     }
 }

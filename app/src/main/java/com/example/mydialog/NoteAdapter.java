@@ -16,9 +16,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ListItemHolder
     private List<Note> noteList;
     private MainActivity mainActivity;
 
+
     public NoteAdapter(MainActivity mainActivity, List<Note> noteList){
         this.mainActivity = mainActivity;
         this.noteList = noteList;
+
     }
 
     @NonNull
@@ -65,6 +67,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ListItemHolder
             description = itemView.findViewById(R.id.textViewDescription);
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
+
         }
 
         @Override
@@ -75,4 +78,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ListItemHolder
         TextView status;
         TextView description;
     }
+
+
 }
