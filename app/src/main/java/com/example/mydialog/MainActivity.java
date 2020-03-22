@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +26,10 @@ import android.widget.Switch;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    //JSON
+    private JSONSerializer serializer;
+    private ArrayList<Note> noteArrayList;
 
     private boolean showDividers;
     private SharedPreferences prefs;
@@ -76,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
 
+        //JSON
+        serializer = new JSONSerializer("Note to Self.json", getApplicationContext());
+        try{
+            noteArrayList = serializer.load();
+        } catch (Exception e){
+            noteArrayList = new ArrayList<>();
+            Log.e("Error loading notes, lol.", "Klick and hold the power off button for 10 seconds and programme will work, lol", e);
+        }
 
 }
 
@@ -125,5 +138,20 @@ public class MainActivity extends AppCompatActivity {
         DialogShowNote dialog = new DialogShowNote();
         dialog.sendNoteSelected(listNote.get(index));
         dialog.show(getSupportFragmentManager(), "");
+    }
+
+    public void saveNotes(){
+        try {
+            serializer.save(noteArrayList);
+        } catch (Exception e){
+            Log.e("Error saving Notes, lol", "Idk what happening", e);
+        }
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+
+        saveNotes();
     }
 }
