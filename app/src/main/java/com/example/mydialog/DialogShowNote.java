@@ -49,7 +49,7 @@ public class DialogShowNote extends DialogFragment {
                 }
             });
         }
-        return builder.create();
+        return builder.setView(dialogView).create();
     }
     public void sendNoteSelected(Note noteSelected) {
         note = noteSelected;
